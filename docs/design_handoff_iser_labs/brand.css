@@ -1,0 +1,137 @@
+/* Iser Labs — design tokens
+   Colors, type ramps, spacing. Imported by every frame. */
+
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500;700&family=Instrument+Serif:ital@0;1&display=swap');
+
+:root {
+  /* — Brand colors —
+     Paper-and-ink core, with sodium amber as the single signal color.
+     Bone and stone fill the neutral middle. */
+  --paper:    #F2EDE3;   /* canvas / background */
+  --bone:     #E4DDCB;   /* secondary surface */
+  --stone:    #A39B89;   /* mid neutral / dividers */
+  --graphite: #3A3631;   /* secondary text */
+  --ink:      #0F0E0C;   /* primary / text */
+  --signal:   #F26418;   /* sodium flare — single accent, active */
+  --signal-deep: #B83F00;
+  --pulse:    #C8553D;   /* sparingly: errors, urgent flags */
+
+  /* — Type stacks — */
+  --font-display: "Space Grotesk", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --font-mono:    "JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace;
+  --font-editorial: "Instrument Serif", "Times New Roman", Times, serif;
+
+  /* — Rules / borders — */
+  --rule: 1px solid var(--ink);
+  --hair: 1px solid color-mix(in oklab, var(--ink) 25%, transparent);
+
+  /* — Layout — */
+  --gutter: 24px;
+}
+
+/* Frame base */
+.frame {
+  font-family: var(--font-display);
+  color: var(--ink);
+  background: var(--paper);
+  overflow: hidden;
+  position: relative;
+  box-sizing: border-box;
+}
+.frame *, .frame *::before, .frame *::after { box-sizing: border-box; }
+
+/* Frame chrome — small serial top-left + label top-right on every artboard.
+   Echoes a lab specimen sheet. */
+.frame-chrome {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.04em;
+  color: var(--graphite);
+  text-transform: uppercase;
+}
+.frame-chrome > * { position: absolute; }
+.frame-chrome .tl { top: 24px; left: 32px; }
+.frame-chrome .tr { top: 24px; right: 32px; }
+.frame-chrome .bl { bottom: 24px; left: 32px; }
+.frame-chrome .br { bottom: 24px; right: 32px; }
+
+/* Shift monogram — a chunky forward slash inside a square frame.
+   Reads as the "/" in iser/labs, a vector, an italicized I.
+   Single source: every wordmark and watermark inherits this. */
+.aperture {
+  display: inline-block;
+  position: relative;
+  aspect-ratio: 1;
+  width: 1em;
+  border: 1.5px solid currentColor;
+  box-sizing: border-box;
+}
+.aperture::before {
+  /* The chunky angled slash */
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 10%;
+  bottom: 10%;
+  width: 22%;
+  background: currentColor;
+  transform: translateX(-50%) skewX(-22deg);
+}
+.aperture::after {
+  /* Two registration marks at top-left and bottom-right corners */
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(currentColor, currentColor) top    4%  left  4%  / 14% 1.5px no-repeat,
+    linear-gradient(currentColor, currentColor) top    4%  left  4%  / 1.5px 14% no-repeat,
+    linear-gradient(currentColor, currentColor) bottom 4%  right 4%  / 14% 1.5px no-repeat,
+    linear-gradient(currentColor, currentColor) bottom 4%  right 4%  / 1.5px 14% no-repeat;
+}
+
+/* Wordmark */
+.wordmark {
+  font-family: var(--font-display);
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.42em;
+  line-height: 1;
+}
+.wordmark .name { display: inline-block; }
+.wordmark .name b { font-weight: 600; }
+.wordmark .sep { width: 1px; align-self: stretch; background: currentColor; opacity: 0.35; }
+.wordmark .labs {
+  font-family: var(--font-mono);
+  font-weight: 400;
+  font-size: 0.5em;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  margin-top: 0.05em;
+}
+
+/* Grid background for cover */
+.grid-bg {
+  background-image:
+    linear-gradient(to right, color-mix(in oklab, var(--ink) 8%, transparent) 1px, transparent 1px),
+    linear-gradient(to bottom, color-mix(in oklab, var(--ink) 8%, transparent) 1px, transparent 1px);
+  background-size: 48px 48px;
+}
+
+/* Misc utility */
+.mono { font-family: var(--font-mono); }
+.italic-ed { font-family: var(--font-editorial); font-style: italic; }
+.kicker {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--graphite);
+}
+.rule { border: 0; border-top: 1px solid var(--ink); margin: 0; }
+.hair { border: 0; border-top: 1px solid color-mix(in oklab, var(--ink) 22%, transparent); margin: 0; }
