@@ -2,7 +2,7 @@
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/iserlabs/.github/main/brand/wordmark-dark.png">
-  <img alt="Iser Labs" src="https://raw.githubusercontent.com/iserlabs/.github/main/brand/wordmark-paper.png" width="440">
+  <img alt="Iser Labs" src="https://raw.githubusercontent.com/iserlabs/.github/main/brand/wordmark-light.png" width="440">
 </picture>
 
 ###### A research studio for computational tools.

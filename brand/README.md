@@ -34,9 +34,8 @@ ticks — it reads as the `/` in `iser/labs`.
 | `avatar-ink-{1024,512}.png` | paper monogram on ink | dark-context avatar |
 | `favicon-32.png`, `favicon-apple-180.png` | small icons | site favicon / touch icon |
 | `mark-1024.png` | ink monogram, transparent | flexible raster |
-| `wordmark-paper.png` | horizontal lockup on paper | README header (light) |
-| `wordmark-dark.png` | horizontal lockup on ink | README header (dark) |
-| `wordmark-ink.png` | lockup, ink, transparent | overlay on light surfaces |
+| `wordmark-light.png` | lockup, ink text, **transparent** | README header (light mode) |
+| `wordmark-dark.png` | lockup, paper text, **transparent** | README header (dark mode) |
 | `wordmark.svg` | lockup vector (Google webfont) | websites (not GitHub README) |
 
 ## Set the GitHub org avatar (manual — no API for this)
@@ -50,7 +49,7 @@ GitHub crops square and rounds the corners.
 ```html
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/iserlabs/.github/main/brand/wordmark-dark.png">
-  <img alt="Iser Labs" src="https://raw.githubusercontent.com/iserlabs/.github/main/brand/wordmark-paper.png" width="420">
+  <img alt="Iser Labs" src="https://raw.githubusercontent.com/iserlabs/.github/main/brand/wordmark-light.png" width="420">
 </picture>
 ```
 
