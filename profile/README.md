@@ -5,14 +5,13 @@
   <img alt="Iser Labs" src="https://raw.githubusercontent.com/iserlabs/.github/main/brand/wordmark-light.png?v=2" width="440">
 </picture>
 
-###### A research studio for computational tools.
+###### Software and small ventures.
 
 </div>
 
 ---
 
-Software, interfaces, and the systems that hold them together. Built small,
-built deliberately — for ourselves first.
+Built small, built deliberately — mostly for ourselves.
 
 ### Work
 
@@ -30,5 +29,5 @@ built deliberately — for ourselves first.
 ---
 
 <div align="center">
-<sub><code>EST. 2025 · BROOKLYN, NY · N 40°44′ W 73°59′ · iserlabs.com</code></sub>
+<sub><code>EST. 2025 · NEW YORK · iserlabs.com</code></sub>
 </div>
