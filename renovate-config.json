@@ -44,6 +44,24 @@
         "major"
       ],
       "enabled": false
+    },
+    {
+      "description": "Hold pnpm entirely \u2014 the fleet deliberately pins packageManager to 10.33.0 for lockfile/autoInstallPeers reproducibility; bump it manually.",
+      "matchPackageNames": [
+        "pnpm"
+      ],
+      "enabled": false
+    },
+    {
+      "description": "Hold undici/ws majors \u2014 security-pinned to patched v6/v8 lines via overrides; a major jump (v8/v9) is a breaking change, not a security patch.",
+      "matchPackageNames": [
+        "undici",
+        "ws"
+      ],
+      "matchUpdateTypes": [
+        "major"
+      ],
+      "enabled": false
     }
   ],
   "vulnerabilityAlerts": {
