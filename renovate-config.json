@@ -1,0 +1,28 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": ["config:recommended"],
+  "description": "Org-wide inherited Renovate config for Iser Labs. Applies to every repo in the org when the Renovate app has `inheritConfig` enabled (Mend cloud: org setting; self-hosted: RENOVATE_INHERIT_CONFIG=true). Until then this file is dormant. The primary job is keeping each site's `@iserlabs/web-kit` git-tag pin current (observability standard R6/R7).",
+  "labels": ["dependencies"],
+  "rangeStrategy": "pin",
+  "git-submodules": { "enabled": false },
+  "packageRules": [
+    {
+      "matchPackageNames": ["@iserlabs/web-kit"],
+      "groupName": "iserlabs web-kit",
+      "labels": ["dependencies", "iserlabs-internal"],
+      "addLabels": ["web-kit"],
+      "semanticCommitType": "chore",
+      "commitMessageTopic": "@iserlabs/web-kit",
+      "automerge": false,
+      "minimumReleaseAge": "0 days"
+    },
+    {
+      "description": "Never auto-adopt a major bump of any dep — open the PR, let a human review (R7: a bad release must not propagate fleet-wide).",
+      "matchUpdateTypes": ["major"],
+      "automerge": false
+    }
+  ],
+  "vulnerabilityAlerts": {
+    "labels": ["security"]
+  }
+}
