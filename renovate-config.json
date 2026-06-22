@@ -34,6 +34,16 @@
         "major"
       ],
       "automerge": false
+    },
+    {
+      "description": "Hold @vitejs/plugin-react on v4 \u2014 v6 requires vite ^8 + React Compiler peers (@rolldown/plugin-babel, babel-plugin-react-compiler), an inappropriate migration for these marketing sites' vitest tooling with no production benefit.",
+      "matchPackageNames": [
+        "@vitejs/plugin-react"
+      ],
+      "matchUpdateTypes": [
+        "major"
+      ],
+      "enabled": false
     }
   ],
   "vulnerabilityAlerts": {
