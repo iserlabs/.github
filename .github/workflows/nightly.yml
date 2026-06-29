@@ -1,0 +1,34 @@
+# .github/workflows/nightly.yml
+name: Nightly (heavy)
+on:
+  workflow_call:
+    inputs:
+      target_url: { type: string, required: true }
+  schedule:
+    - cron: "30 7 * * *"   # 07:30 UTC nightly
+  workflow_dispatch:
+    inputs:
+      target_url: { type: string, required: true }
+
+concurrency:
+  group: nightly-${{ github.repository }}
+  cancel-in-progress: true
+
+jobs:
+  heavy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: "22", cache: pnpm }
+      - run: pnpm install --frozen-lockfile
+      - id: pw
+        run: echo "v=$(node -p "require('@playwright/test/package.json').version")" >> "$GITHUB_OUTPUT"
+      - uses: actions/cache@v4
+        with: { path: ~/.cache/ms-playwright, key: "pw-${{ runner.os }}-${{ steps.pw.outputs.v }}" }
+      - run: pnpm exec playwright install --with-deps chromium
+      - run: pnpm run test:a11y --if-present          # full suite, NOT sharded
+      - run: pnpm run test:integration --if-present
+      - run: pnpm run perf:budget --if-present
+      - run: pnpm run seo:lighthouse "${{ inputs.target_url || vars.PROD_URL }}" --if-present
