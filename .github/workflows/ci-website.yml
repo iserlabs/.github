@@ -1,0 +1,54 @@
+# .github/workflows/ci-website.yml
+name: CI (website)
+on:
+  workflow_call:
+    inputs:
+      tier: { type: string, default: "basic" }      # basic | full
+      node-version: { type: string, default: "22" }
+
+concurrency:
+  group: ciw-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: "${{ inputs.node-version }}", cache: pnpm }
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm run lint --if-present
+      - run: pnpm run typecheck --if-present
+      - run: pnpm run test:unit --if-present
+      - if: ${{ inputs.tier == 'full' }}
+        run: |
+          pnpm run check:contrast --if-present
+          pnpm run check:bundle-size --if-present
+          pnpm run check-source-maps --if-present
+
+  smoke:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: "${{ inputs.node-version }}", cache: pnpm }
+      - run: pnpm install --frozen-lockfile
+      - id: pw
+        run: echo "v=$(node -p "require('@playwright/test/package.json').version")" >> "$GITHUB_OUTPUT"
+      - uses: actions/cache@v4
+        with:
+          path: ~/.cache/ms-playwright
+          key: pw-${{ runner.os }}-${{ steps.pw.outputs.v }}
+      - run: pnpm exec playwright install --with-deps chromium
+      - run: pnpm exec playwright test --grep @smoke
+        env: { PLAYWRIGHT_SMOKE: "1" }
+
+  gitleaks:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with: { fetch-depth: 0 }
+      - uses: gitleaks/gitleaks-action@v2
