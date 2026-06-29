@@ -1,8 +1,12 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": [
-    "config:recommended"
+    "config:recommended",
+    "group:allNonMajor"
   ],
+  "schedule": ["before 6am on monday"],
+  "prConcurrentLimit": 3,
+  "prHourlyLimit": 2,
   "description": "Org-wide inherited Renovate config for Iser Labs. Applies to every repo in the org when the Renovate app has `inheritConfig` enabled (Mend cloud: org setting; self-hosted: RENOVATE_INHERIT_CONFIG=true). Until then this file is dormant. The primary job is keeping each site's `@iserlabs/web-kit` git-tag pin current (observability standard R6/R7).",
   "labels": [
     "dependencies"
