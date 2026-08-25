@@ -11,23 +11,6 @@
 
 ---
 
-Built small, built deliberately — mostly for ourselves.
-
-### Work
-
-| | |
-|---|---|
-| **Palisade Stays** | Short-term rental management, Northern NJ → [palisadestays.com](https://palisadestays.com) |
-| **LeadForge** | Lead routing for service businesses |
-| **Landstar Construction** | Roofing & exteriors, NJ |
-| **photo-tools** | Sensor comparison & lens calculators for photographers · [repo](https://github.com/iserlabs/phototools.io) |
-| **photobot** | Discord bot + dashboard · [repo](https://github.com/iserlabs/photobot) |
-| **chromascope** | TypeScript core with Rust & JS plugins · [repo](https://github.com/iserlabs/chromascope) |
-
-<sub>Private repos link only for members.</sub>
-
----
-
 <div align="center">
 <sub><code>EST. 2025 · NEW YORK · iserlabs.com</code></sub>
 </div>
